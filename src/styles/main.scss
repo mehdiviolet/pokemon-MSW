@@ -1,0 +1,10 @@
+// src/styles/main.scss
+
+// 1. Configurazione
+@use "variables";
+
+// 2. Base
+@use "reset";
+@use "typography";
+
+// Qui sotto, in futuro, importeremo i componenti (es. @use '../components/Card/Card';)
