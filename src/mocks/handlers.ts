@@ -11,6 +11,7 @@ export const handlers = [
   http.get("/api/items", async () => {
     await delay(500);
     return HttpResponse.json(mockItems);
+    // return HttpResponse.json([]); // test array vuota
   }),
 
   // 2. DETTAGLIO (Aggiornato per Array)
@@ -51,7 +52,30 @@ export const handlers = [
         health_points: null,
       });
     }
+    // if (elapsed < 3000) {
+    //   const progress = Math.min(
+    //     100,
+    //     Math.floor(((elapsed - 1000) / 2000) * 100),
+    //   );
+    //   return HttpResponse.json({
+    //     status: "running",
+    //     progress,
+    //     health_points: null,
+    //   });
+    // }
     if (elapsed < 3000) {
+      // --- LOGICA BONUS: DADO SFORTUNATO 🎲 ---
+      // Ogni volta che il frontend chiede info, c'è il 10% di probabilità che fallisca.
+      // Poiché il polling avviene più volte, la probabilità totale è circa il 20-30%.
+      if (Math.random() < 0.1) {
+        return HttpResponse.json({
+          status: "failed", // <--- STATO FALLITO
+          progress: 0,
+          health_points: null,
+        });
+      }
+      // ----------------------------------------
+
       const progress = Math.min(
         100,
         Math.floor(((elapsed - 1000) / 2000) * 100),

@@ -1,0 +1,41 @@
+@use "../../styles/variables" as *;
+
+.battle-progress {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px; // Spazio tra barra e testo
+  margin-bottom: 10px;
+
+  &__bar {
+    flex-grow: 1; // La barra prende tutto lo spazio
+    height: 12px;
+    background-color: #e0e0e0; // Sfondo grigio della barra vuota
+    border-radius: 6px;
+    overflow: hidden; // Per tagliare il riempimento ai bordi arrotondati
+  }
+
+  &__fill {
+    height: 100%;
+    background-color: $color-primary; // Blu default
+    transition:
+      width 0.3s ease-out,
+      background-color 0.3s;
+    width: 0%; // Parte da 0
+
+    &--failed {
+      background-color: $color-secondary; // Rosso se fallito
+    }
+
+    &--done {
+      background-color: #4caf50; // Verde se finito (opzionale)
+    }
+  }
+
+  &__text {
+    font-weight: 700;
+    min-width: 40px; // Evita che il testo salti
+    text-align: right;
+    color: $color-primary;
+  }
+}

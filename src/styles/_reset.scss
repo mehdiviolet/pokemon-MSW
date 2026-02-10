@@ -8,6 +8,12 @@
   padding: 0;
 }
 
+body,
+html {
+  overflow-x: hidden; /* Taglia via tutto ciò che esce lateralmente */
+  width: 100%;
+}
+
 ul,
 ol {
   list-style: none;

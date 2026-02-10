@@ -1,0 +1,64 @@
+// src/components/Loader/Loader.scss
+@use "../../styles/variables" as *;
+// @use "../../src/styles/variables" as *;
+
+.pokeball-spinner {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 4px solid #333; // Bordo esterno nero
+  position: relative;
+
+  // Il trucco: Gradiente netto per fare metà rossa e metà bianca
+  background: linear-gradient(
+    to bottom,
+    $color-secondary 0%,
+    // Rosso
+    $color-secondary 48%,
+    #333 48%,
+    // Linea nera in mezzo (tramite gradiente)
+    #333 52%,
+    $color-white 52%,
+    // Bianco
+    $color-white 100%
+  );
+
+  animation: spin 1s linear infinite; // Rotazione infinita
+
+  // Il bottone centrale (Cerchio bianco con bordo nero)
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 15px;
+    background-color: $color-white;
+    border: 4px solid #333;
+    border-radius: 50%;
+    z-index: 10;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background-color: $color-white;
+    border: 4px solid #333;
+    border-radius: 50%;
+    z-index: 10;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

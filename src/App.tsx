@@ -1,11 +1,9 @@
+// src/App.tsx
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router"; // Importa la configurazione appena creata
+
 function App() {
-  return (
-    <>
-      <h1>Hi</h1>
-      <h2>Hi</h2>
-      <h3>Hi</h3>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

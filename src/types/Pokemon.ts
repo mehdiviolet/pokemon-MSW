@@ -44,7 +44,7 @@ export interface PokemonDetail {
 }
 
 // --- TIPI PER IL JOB (Restano uguali) ---
-export type JobStatus = "queued" | "running" | "done" | "failed";
+export type JobStatus = "idle" | "queued" | "running" | "done" | "failed";
 
 export interface JobResponse {
   job_id: string;

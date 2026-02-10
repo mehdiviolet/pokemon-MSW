@@ -1,0 +1,164 @@
+@use "../../styles/variables" as *;
+
+.pokemon-card {
+  background: $color-white;
+  border-radius: $border-radius;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 340px; // Larghezza simile al design
+  font-family: $font-heading;
+  transition: transform 0.2s;
+  border: 1px solid #eee;
+
+  // --- 1. HEADER DINAMICO ---
+  &__header {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $color-white;
+    background-color: $color-primary; // Default: Blu Notte (#1D2C4E)
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+
+    &--warning {
+      background-color: #a60000; // Rosso scuro (dal tuo screenshot)
+    }
+
+    &--defeated {
+      background-color: #8d99ae; // Grigio bluastro (dal tuo screenshot)
+    }
+  }
+
+  // --- 2. IMMAGINE ---
+  &__image-container {
+    background-color: #ebf3f5; // Azzurrino chiaro di sfondo
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; // Per l'overlay
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+    transition: filter 0.3s;
+    z-index: 1;
+
+    &--defeated {
+      filter: grayscale(100%) opacity(0.5) contrast(1.2); // Effetto "spento"
+    }
+  }
+
+  // Overlay Teschio
+  &__skull-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 60px;
+    height: 60px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // --- 3. CORPO ---
+  &__body {
+    padding: 16px;
+  }
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: $color-primary;
+    margin-bottom: 8px;
+  }
+
+  &__description {
+    font-family: $font-body;
+    color: #4a4a4a;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    min-height: 60px; // Per allineare le card
+  }
+
+  // --- 4. GRIGLIA STATISTICHE ---
+  &__stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; // 3 colonne uguali
+    gap: 8px;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 12px;
+    padding: 8px 0;
+  }
+
+  &__stat-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: $color-primary;
+    font-weight: 700;
+    padding: 4px;
+    border-radius: 4px;
+
+    img {
+      width: 16px;
+      height: 16px;
+      margin-bottom: 4px;
+    }
+
+    // STILE SPECIALE PER COLONNA HP (PS)
+    &--hp-warning {
+      background-color: #a60000; // Sfondo Rosso
+      color: white; // Testo Bianco
+
+      img {
+        filter: brightness(0) invert(1);
+      } // Rende l'icona bianca
+    }
+
+    &--hp-defeated {
+      background-color: #8d99ae; // Sfondo Grigio
+      color: white;
+
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
+
+  // --- 5. FOOTER BASSO ---
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: $color-primary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__footer-icons {
+    display: flex;
+    gap: 4px;
+
+    img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

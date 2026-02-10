@@ -1,0 +1,49 @@
+// @use "../../styles/variables" as *;
+@use "../../src/styles/variables" as *;
+
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  min-height: 60vh; // Per centrarlo verticalmente nello schermo
+
+  &__image {
+    max-width: 300px; // Dimensione immagine 404
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: 2rem;
+    font-weight: 800;
+    color: $color-primary; // Blu scuro
+    margin-bottom: 8px;
+  }
+
+  &__text {
+    font-family: $font-body;
+    color: #4a4a4a;
+    margin-bottom: 30px;
+  }
+
+  &__button {
+    background-color: $color-primary; // Blu scuro (#1D2C4E)
+    color: white;
+    padding: 12px 32px;
+    border-radius: 30px; // Pillola
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+    letter-spacing: 1px;
+
+    &:hover {
+      background-color: lighten($color-primary, 10%);
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@use "../../styles/variables" as *;
+
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background-color: $color-white;
+  border-radius: 20px; // Pillola
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Leggera ombra
+  font-family: $font-heading;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: $color-primary;
+  text-transform: capitalize; // "acqua" -> "Acqua"
+  border: 1px solid #eee;
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+  }
+}
