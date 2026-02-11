@@ -51,8 +51,8 @@
   &__image-container {
     // #ebf3f5 -> Uso il tuo sfondo soft standard (che è azzurrino/grigio 5%)
     background-color: $border-color-soft;
-
     height: 200px;
+    width: 100%; // Assicurati che il contenitore occupi tutta la larghezza della card
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,9 +61,13 @@
   }
 
   &__image {
-    width: 80%;
-    height: auto;
-    object-fit: contain;
+    width: 100%; // Forza l'immagine a occupare tutta la larghezza
+    height: 100%; // Forza l'immagine a occupare tutti i 200px di altezza
+
+    // QUESTA è la proprietà magica:
+    // "cover" fa uno zoom e ritaglia l'immagine affinché copra tutto lo spazio
+    object-fit: cover;
+    object-position: center;
     transition: filter 0.3s;
     z-index: 1;
 
@@ -92,14 +96,16 @@
 
   // --- 3. CORPO ---
   &__body {
-    padding: $spacing-xl; // 16px
+    // padding: $spacing-xl 0; // 16px
   }
 
   &__title {
     font-size: 1.2rem;
     font-weight: 800;
     color: $color-primary;
-    margin-bottom: $spacing-l; // 8px
+    // margin-bottom: $spacing-l; // 8px
+    margin-top: $spacing-xl; // 8px
+    padding: 0 $spacing-xl; // 16px
   }
 
   &__description {
@@ -108,8 +114,10 @@
     font-size: 0.9rem;
     line-height: 1.4;
 
+    padding: 0 $spacing-xl; // 16px
     // 20px non è standard. Ho messo 24px (lg) per spaziare meglio, oppure usa xl (16px)
-    margin-bottom: 24px;
+    // margin-bottom: 24px;
+    margin-bottom: $spacing-xl; // 8px
     min-height: 60px;
   }
 
@@ -120,11 +128,13 @@
     gap: $spacing-l; // 8px
 
     // #f0f0f0 -> $border-light
-    border-top: $border-light;
-    border-bottom: $border-light;
+    // border-top: $border-light;
+    // border-bottom: $border-light;
 
     margin-bottom: $spacing-l; // 12px -> 8px o 16px. Qui ho stretto a 8px.
-    padding: $spacing-l 0; // 8px
+    // padding: $spacing-l 0;
+    padding: 0 $spacing-2xl;
+    background: $bg-color-soft;
   }
 
   &__stat-col {
@@ -135,8 +145,9 @@
     font-size: 0.75rem;
     color: $color-primary;
     font-weight: 700;
-    padding: 4px; // Spazio micro, ok hardcoded o $spacing-xs (se esiste 4px)
-    border-radius: 4px;
+    // padding: 4px; // Spazio micro, ok hardcoded o $spacing-xs (se esiste 4px)
+    padding: $spacing-l; // Spazio micro, ok hardcoded o $spacing-xs (se esiste 4px)
+    // border-radius: 4px;
 
     img {
       width: 16px;
@@ -149,7 +160,7 @@
       color: $color-white;
 
       img {
-        filter: brightness(0) invert(1);
+        filter: $svg-white;
       }
     }
 
@@ -158,16 +169,21 @@
       color: $color-white;
 
       img {
-        filter: brightness(0) invert(1);
+        filter: $svg-white;
       }
     }
   }
 
-  // --- 5. FOOTER BASSO ---
+  // --- FOOTER CONTAINER ---
   &__footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: $spacing-l $spacing-xl; // Usa le tue variabili $spacing se preferisci
+  }
+
+  // TESTO RARITÀ
+  &__rarity-text {
     font-size: 0.7rem;
     font-weight: 700;
     color: $color-primary;
@@ -175,13 +191,45 @@
     letter-spacing: 0.5px;
   }
 
-  &__footer-icons {
+  // WRAPPER DELLE ICONE
+  &__types {
     display: flex;
-    gap: 4px; // Spazio micro
+    align-items: center;
+    // Rimuoviamo gap qui perché useremo margini negativi per l'overlap
+  }
 
+  // IL BADGE (Stile condiviso)
+  &__type-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Stile Pillola
+    background-color: $color-primary;
+    border-radius: 20px;
+    padding: 6px 12px; // Spazio interno
+    border: 2px solid white; // Il bordo bianco crea lo "stacco" quando si sovrappongono
+
+    // Gestione Posizione per z-index
+    position: relative;
+
+    // ICONA INTERNA
     img {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      display: block;
+      filter: brightness(0) invert(1); // Rende l'icona bianca
     }
+
+    // --- LOGICA OVERLAP (BEST PRACTICE) ---
+    // Seleziona il PRIMO badge e lo sposta sopra il secondo
+    &:first-child {
+      z-index: 2; // Sta sopra
+      margin-right: -10px; // Margine negativo: Tira il secondo elemento SOTTO di sé
+    }
+
+    // Se volessi l'effetto contrario (il secondo sopra il primo),
+    // useresti margin-left negativo sul secondo.
   }
 }

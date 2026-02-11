@@ -3,10 +3,12 @@ import "./Loader.scss";
 
 export const Loader = () => {
   return (
-    <div
-      className="pokeball-spinner"
-      aria-label="Caricamento in corso..."
-      role="status"
-    ></div>
+    <div className="loader-overlay">
+      <div
+        className="pokeball-spinner"
+        aria-label="Caricamento in corso..."
+        role="status"
+      ></div>
+    </div>
   );
 };

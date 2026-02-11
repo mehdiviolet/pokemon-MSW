@@ -6,6 +6,7 @@
   align-items: center;
   gap: 10px; // Spazio tra barra e testo
   margin-bottom: 10px;
+  padding: $spacing-l $spacing-2xl;
 
   &__bar {
     flex-grow: 1; // La barra prende tutto lo spazio

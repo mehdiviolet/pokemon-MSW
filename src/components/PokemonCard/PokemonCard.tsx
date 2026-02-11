@@ -106,15 +106,36 @@ export const PokemonCard = ({ pokemon }: PokemonCardProps) => {
         </div>
 
         {/* 5. FOOTER */}
-        <div className="pokemon-card__footer">
+        {/* <div className="pokemon-card__footer">
           <span>{rarity.replace(/_/g, " ")}</span>{" "}
-          {/* "pokèmon_base" -> "pokèmon base" */}
-          <div className="pokemon-card__footer-icons">
-            <img src={typology.icon_url} alt={typology.name} />
-            <img src={energy.icon_url} alt={energy.name} />
+          <div className="pokemon-card__footer-imgs">
+            <div className="pokemon-card__footer-icons-first">
+              <img src={typology.icon_url} alt={typology.name} />
+            </div>
+            <div className="pokemon-card__footer-icons-second">
+              <img src={energy.icon_url} alt={energy.name} />
+            </div>
+          </div>
+        </div> */}
+        <div className="pokemon-card__footer">
+          {/* RARITY */}
+          <span className="pokemon-card__rarity-text">
+            {rarity.replace(/_/g, " ")}
+          </span>
 
-            {/* <TypeBadge name={typology.name} iconUrl={typology.icon_url} /> */}
-            {/* Qui potresti metterne altri se il mock li avesse */}
+          {/* ICONE TIPO (Wrapper) */}
+          <div className="pokemon-card__types">
+            {/* Icona 1 (Acqua) */}
+            {typology.name !== "neutro" && (
+              <div className="pokemon-card__type-badge">
+                <img src={typology.icon_url} alt={typology.name} />
+              </div>
+            )}
+
+            {/* Icona 2 (Stella) */}
+            <div className="pokemon-card__type-badge">
+              <img src={energy.icon_url} alt={energy.name} />
+            </div>
           </div>
         </div>
       </div>

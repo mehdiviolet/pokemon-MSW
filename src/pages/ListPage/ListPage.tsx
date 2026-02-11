@@ -17,6 +17,7 @@ export const ListPage = () => {
         setItems(data);
       } catch (err) {
         setError(true); // C'è stato un errore
+        console.error(err);
       } finally {
         setLoading(false);
       }

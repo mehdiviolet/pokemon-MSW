@@ -16,7 +16,7 @@ export const handlers = [
 
   // 2. DETTAGLIO (Aggiornato per Array)
   http.get("/api/items/:id", async ({ params }) => {
-    await delay(300);
+    await delay(500);
     const { id } = params;
 
     // ORA USIAMO .find() PERCHÉ È UN ARRAY

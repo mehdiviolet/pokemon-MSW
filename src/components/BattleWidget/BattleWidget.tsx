@@ -23,6 +23,14 @@ export const BattleWidget = ({
 }: BattleWidgetProps) => {
   if (!pokemon) return null;
 
+  // 1. Variabile di controllo: La barra si vede solo se sta caricando o correndo
+  const showProgressBar =
+    // true ||
+    status === "running" ||
+    status === "queued" ||
+    status === "failed" ||
+    status === "done";
+
   // Logica di visualizzazione pura
   const getButtonText = () => {
     switch (status) {
@@ -59,20 +67,21 @@ export const BattleWidget = ({
 
       {/* CONTROLLI */}
       <div className="battle-widget__controls">
-        {/* {status !== "failed" && (
+        {/* 2. LOGICA DI SCAMBIO (SWAP) */}
+        {showProgressBar ? (
+          // CASO A: Se sta combattendo, mostriamo SOLO la Barra
           <BattleProgressBar
             progress={progress}
             status={status}
-            isVisible={status === "running" || status === "queued"}
+            isVisible={true} // È true perché siamo già dentro l'if showProgressBar
           />
-        )} */}
-        {
-          <BattleProgressBar
-            progress={progress}
-            status={status}
-            isVisible={status === "running" || status === "queued"}
-          />
-        }
+        ) : (
+          // CASO B: Se NON sta combattendo (idle, done, failed), mostriamo il Testo
+          // Aggiungi una classe se vuoi stilizzarlo (es. margine, colore)
+          <p className="battle-widget__info-text">
+            È tutto pronto, inizia la sfida!
+          </p>
+        )}
         <BattleButton
           onClick={onStartBattle}
           disabled={status === "queued" || status === "running"}

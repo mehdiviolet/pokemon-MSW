@@ -36,6 +36,16 @@
     flex-direction: column;
     justify-content: center;
   }
+  &__info-text {
+    text-align: center; // Centra il testo
+    color: $color-primary; // Usa il colore principale (blu scuro)
+    font-size: 1rem; // Dimensione leggibile
+    font-weight: 700; // Leggermente grassetto
+    margin-bottom: $spacing-l; // (es. 16px) Spazio tra il testo e il bottone
+
+    // Opzionale: se vuoi che sia grigio scuro invece che blu
+    // color: #4A4A4A;
+  }
 
   &__tech-error {
     // red -> $color-secondary (il tuo rosso di sistema)

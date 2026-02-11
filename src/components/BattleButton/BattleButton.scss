@@ -4,13 +4,15 @@
   background-color: $color-primary;
   color: $color-white;
   font-family: $font-heading;
-  font-weight: 700;
+  font-weight: 600;
 
   padding: $spacing-l $spacing-2xl;
 
-  border-radius: $radius-md;
+  // border-radius: $radius-md;
+  border-radius: $radius-infinte;
   font-size: 1rem;
   max-width: 340px;
+  // letter-spacing: 3px;
   width: 100%;
   margin: 0 auto;
   transition: all 0.2s ease;

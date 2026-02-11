@@ -1,5 +1,4 @@
 // src/router.tsx
-import React from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 // Importiamo i componenti che abbiamo creato

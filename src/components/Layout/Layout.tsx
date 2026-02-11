@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import "./Layout.scss";
 
 // Percorso del logo come indicato
@@ -9,7 +9,9 @@ export const Layout = () => {
     <div className="app-layout">
       {/* 1. HEADER BIANCO CON LOGO */}
       <header className="app-layout__header">
-        <img src={LOGO_URL} alt="Pokémon TCG" className="app-layout__logo" />
+        <Link to="/">
+          <img src={LOGO_URL} alt="Pokémon TCG" className="app-layout__logo" />
+        </Link>
       </header>
 
       {/* 2. CONTENUTO CENTRALE */}

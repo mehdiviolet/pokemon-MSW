@@ -1,56 +1,80 @@
 @use "../../styles/variables" as *;
 
-.pokeball-spinner {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 4px solid $color-primary; // Usa il tuo colore scuro principale
-  position: relative;
-  box-sizing: border-box; // Importante per non sballare le misure col bordo
+// --- CONTENITORE SFONDO SCURO (Invariato) ---
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(29, 44, 78, 0.9); // Blu notte trasparente
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  // Il trucco: Gradiente netto
+// --- POKEBALL SPINNER (Stile Chunky/Flat) ---
+.pokeball-spinner {
+  // 1. Dimensione
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  position: relative;
+  box-sizing: border-box;
+
+  // 2. BORDO ESTERNO SPESSO
+  // Nell'immagine il bordo esterno è molto grosso. Passiamo da 4px a 8px/10px.
+  border: 8px solid $color-primary;
+
+  // 3. GRADIENTE (La fascia centrale deve essere più larga)
   background: linear-gradient(
     to bottom,
     $color-secondary 0%,
-    // Rosso
-    $color-secondary 48%,
-    // Fine Rosso
-    $color-primary 48%,
-    // Inizio Linea Scura
-    $color-primary 52%,
-    // Fine Linea Scura
-    $color-white 52%,
-    // Inizio Bianco
-    $color-white 100% // Fine Bianco
+    $color-secondary 42%,
+    // Rosso finisce prima (era 48%)
+    $color-primary 42%,
+    // Nero inizia
+    $color-primary 58%,
+    // Nero finisce dopo (era 52%) -> Fascia molto più larga
+    $color-white 58%,
+    // Bianco inizia
+    $color-white 100%
   );
 
   animation: spin 1s linear infinite;
 
-  // Cerchio centrale grande (Bordo del bottone)
+  // 4. CERCHIO CENTRALE GRANDE (Il "Cardine" Nero)
   &::before {
     content: "";
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 24px; // Leggermente più piccolo per proporzione
-    height: 24px;
-    background-color: $color-primary; // Sfondo scuro
+
+    // Deve coprire la larghezza della fascia centrale
+    width: 38px;
+    height: 38px;
+    background-color: $color-primary; // Tutto nero
     border-radius: 50%;
     z-index: 5;
   }
 
-  // Bottone centrale piccolo (Il click)
+  // 5. BOTTONE CENTRALE BIANCO (Il "Click")
   &::after {
     content: "";
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 14px;
-    height: 14px;
+
+    // Più piccolo del cardine nero
+    width: 22px;
+    height: 22px;
     background-color: $color-white;
-    border: 2px solid $color-primary; // Bordo scuro
+
+    // Aggiungiamo un bordo al bottone bianco per renderlo identico alla foto
+    border: 3px solid $color-primary;
     border-radius: 50%;
     z-index: 10;
   }

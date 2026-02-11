@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getPokemonDetail } from "../../services/pokemonService";
 import { type PokemonDetail } from "../../types/Pokemon";
-import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
-import { BattleButton } from "../../components/BattleButton/BattleButton";
-import { BattleProgressBar } from "../../components/BattleProgressBar/BattleProgressBar";
 import { Loader } from "../../components/Loader/Loader";
 import { useBattle } from "../../hooks/useBattle";
 import "./DetailPage.scss";
 import { BattleWidget } from "../../components/BattleWidget/BattleWidget";
+import { NotFoundPage } from "../NotFoundPage";
 
 export const DetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -37,6 +35,7 @@ export const DetailPage = () => {
         setPokemon(data);
       } catch (err) {
         setPageError("Pokémon non trovato o errore server.");
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -51,7 +50,7 @@ export const DetailPage = () => {
         prev ? { ...prev, health_points: battleResultHp } : null,
       );
     }
-  }, [status, battleResultHp]);
+  }, [status, battleResultHp, pokemon]);
 
   if (loading)
     return (
@@ -63,9 +62,10 @@ export const DetailPage = () => {
     );
   if (pageError || !pokemon)
     return (
-      <div className="error-msg" style={{ textAlign: "center", marginTop: 50 }}>
-        {pageError || "Non trovato"}
-      </div>
+      // <div className="error-msg" style={{ textAlign: "center", marginTop: 50 }}>
+      //   {pageError || "Non trovato"}
+      // </div>
+      <NotFoundPage />
     );
 
   return (
@@ -73,7 +73,9 @@ export const DetailPage = () => {
       {/* 1. HERO BANNER SFONDO */}
       <div
         className="detail-page__banner"
-        style={{ backgroundImage: `url('/assets/images/source1.png')` }}
+        style={{
+          backgroundImage: `url('${pokemon.image_url}')`,
+        }}
       ></div>
 
       {/* 2. MAIN CARD FLOTTANTE */}
@@ -104,7 +106,6 @@ export const DetailPage = () => {
           onStartBattle={() => id && startBattle(id)}
         />
       </main>
-
       {/* 3. SEZIONE EXTRA DETAILS (Immagine unica dal mock) */}
       <section className="detail-page__extra">
         <img

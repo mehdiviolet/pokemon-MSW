@@ -21,15 +21,19 @@
   font-size: 0.85rem;
   font-weight: 600;
   color: $color-primary;
-  text-transform: capitalize;
+  text-transform: uppercase;
 
   // #eee -> variabile border standard
   border: $border-light;
+  color: $color-white;
+  // background-color:
+  background: $color-white-badge;
 
   &__icon {
     // 16px -> corrisponde alla tua taglia XL
     width: $spacing-xl;
     height: $spacing-xl;
     object-fit: contain;
+    filter: $svg-white;
   }
 }
