@@ -3,21 +3,33 @@
 .type-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+
+  // 6px -> Standardizzo a 8px
+  gap: $spacing-l;
+
+  // 6px 12px -> Sono valori "micro".
+  // O li lasci hardcoded, o usi: padding: $spacing-l $spacing-xl; (8px 16px - più grande)
   padding: 6px 12px;
+
   background-color: $color-white;
-  border-radius: 20px; // Pillola
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Leggera ombra
+  border-radius: 20px; // Pillola (forma specifica, ok hardcoded)
+
+  // Uniformo l'ombra al colore primario (invece del nero puro)
+  box-shadow: 0 2px 4px rgba($color-primary, 0.1);
+
   font-family: $font-heading;
   font-size: 0.85rem;
   font-weight: 600;
   color: $color-primary;
-  text-transform: capitalize; // "acqua" -> "Acqua"
-  border: 1px solid #eee;
+  text-transform: capitalize;
+
+  // #eee -> variabile border standard
+  border: $border-light;
 
   &__icon {
-    width: 16px;
-    height: 16px;
+    // 16px -> corrisponde alla tua taglia XL
+    width: $spacing-xl;
+    height: $spacing-xl;
     object-fit: contain;
   }
 }

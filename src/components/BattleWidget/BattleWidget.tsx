@@ -1,5 +1,4 @@
 // src/components/BattleWidget/BattleWidget.tsx
-import React from "react";
 import { type PokemonDetail, type JobStatus } from "../../types/Pokemon";
 import { PokemonCard } from "../PokemonCard/PokemonCard";
 import { BattleProgressBar } from "../BattleProgressBar/BattleProgressBar";
@@ -60,21 +59,26 @@ export const BattleWidget = ({
 
       {/* CONTROLLI */}
       <div className="battle-widget__controls">
-        {status !== "failed" && (
+        {/* {status !== "failed" && (
           <BattleProgressBar
             progress={progress}
             status={status}
             isVisible={status === "running" || status === "queued"}
           />
-        )}
-
+        )} */}
+        {
+          <BattleProgressBar
+            progress={progress}
+            status={status}
+            isVisible={status === "running" || status === "queued"}
+          />
+        }
         <BattleButton
           onClick={onStartBattle}
           disabled={status === "queued" || status === "running"}
         >
           {getButtonText()}
         </BattleButton>
-
         {error && status !== "failed" && (
           <p className="battle-widget__tech-error">{error}</p>
         )}

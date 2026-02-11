@@ -6,44 +6,56 @@ const meta = {
   component: BattleProgressBar,
   decorators: [
     (Story) => (
-      <div style={{ width: "300px" }}>
+      <div style={{ width: "300px", padding: "20px", background: "#f5f7fa" }}>
         <Story />
       </div>
     ),
   ],
+  // Impostiamo isVisible true di default per tutte le storie
+  args: {
+    isVisible: true,
+  },
 } satisfies Meta<typeof BattleProgressBar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Queued: Story = {
+// 1. Stato Iniziale: 0% (Queued)
+export const Progress0: Story = {
   args: {
     progress: 0,
     status: "queued",
-    isVisible: true,
   },
 };
 
-export const Running50: Story = {
+// 2. Avanzamento: 25% (Running)
+export const Progress25: Story = {
   args: {
-    progress: 50,
+    progress: 25,
     status: "running",
-    isVisible: true,
   },
 };
 
-export const Done: Story = {
+// 3. Avanzamento: 75% (Running)
+export const Progress75: Story = {
+  args: {
+    progress: 75,
+    status: "running",
+  },
+};
+
+// 4. Completato: 100% (Done)
+export const Progress100: Story = {
   args: {
     progress: 100,
     status: "done",
-    isVisible: true,
   },
 };
 
+// Extra: Stato Fallito (Bloccato)
 export const Failed: Story = {
   args: {
-    progress: 65, // Si è bloccato al 65%
+    progress: 45,
     status: "failed",
-    isVisible: true,
   },
 };

@@ -1,20 +1,34 @@
 // src/styles/_variables.scss
 
 // --- COLORS ---
-// Estratti visivamente dai tuoi screenshot
-$color-primary: #1d2c4e; // Blu scuro (Intestazioni, bottoni)
-$color-secondary: #e3350d; // Rosso (Warning, Badge)
-$color-background: #f2f4f8; // Grigio chiaro (Sfondo pagina)
+$color-primary: #101a2e; // Blu scuro
+$color-secondary: #8c0202; // Rosso
+$color-background: #f2f4f8; // Grigio chiaro
 $color-white: #ffffff;
-$color-text-main: #333333;
-$color-text-light: #777777;
+$color-text-main: #101a2e;
+$color-text-light: #9ba8ba;
 
-// --- FONTS  ---
+// --- FONTS ---
 $font-heading: "Work Sans", sans-serif;
 $font-body: "Open Sans", sans-serif;
 
-// --- SPACING ---
-$spacing-sm: 8px;
-$spacing-md: 16px;
-$spacing-lg: 24px;
-$border-radius: 12px;
+// --- SPACING (Figma s-size) ---
+$spacing-l: 8px; // Figma: L
+$spacing-xl: 16px; // Figma: XL
+$spacing-2xl: 32px; // Figma: 2XL
+$spacing-3xl: 40px; // Figma: 3XL (Nuovo!)
+$spacing-4xl: 80px; // Figma: 4XL (visto prima)
+
+// --- LAYOUT ---
+$container-max-width: 1088px;
+$card-width: 260px;
+
+// --- BORDERS & RADIUS ---
+$radius-md: 8px;
+
+// Uso la variabile colore definita sopra
+$border-color-soft: rgba($color-primary, 0.05);
+$border-light: 1px solid $border-color-soft;
+
+// --- SHADOWS ---
+$shadow-soft: -2px 4px 6px $border-color-soft;

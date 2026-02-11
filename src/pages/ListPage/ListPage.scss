@@ -1,13 +1,20 @@
 @use "../../styles/variables" as *;
 
 .list-page {
-  // --- HERO (Resta uguale) ---
+  // --- HERO ---
   &__hero {
     background-color: $color-white;
-    padding: 32px;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-    margin-bottom: 32px;
+
+    // 32px -> spacing-2xl
+    padding: $spacing-2xl;
+
+    border-radius: 16px; // Manca variabile $radius-lg (16px). Lascio fisso.
+
+    // Ombra custom o usa $shadow-soft se simile
+    box-shadow: 0 4px 6px rgba($color-primary, 0.05);
+
+    // 32px -> spacing-2xl
+    margin-bottom: $spacing-2xl;
     text-align: left;
   }
 
@@ -16,12 +23,14 @@
     color: $color-primary;
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 12px;
+
+    // 12px non standard -> Standardizzo a 16px (xl)
+    margin-bottom: $spacing-xl;
   }
 
   &__text {
     font-family: $font-body;
-    color: #4a4a4a;
+    color: $color-primary; // O $color-text-main se preferisci
     line-height: 1.6;
     font-size: 1rem;
     max-width: 800px;
@@ -31,23 +40,25 @@
   &__grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 24px;
+
+    // CORREZIONE: $spacing-lg non esiste. Uso 2xl (32px) o xl (16px).
+    gap: $spacing-xl;
   }
 
-  // --- STATO DI ERRORE (Nuovo!) ---
-  // Questo sostituisce la griglia quando non ci sono dati
+  // --- STATO DI ERRORE ---
   &__no-results {
-    background-color: #e6e8eb; // Grigio simile allo screenshot
-    color: #4a4a4a;
-    padding: 60px 20px; // Molto spazio verticale
+    // Sostituito con la variabile border-soft che ha lo stesso colore/alpha
+    background-color: $border-color-soft;
+
+    color: $color-primary;
+
+    // 60px 20px -> Standardizzo a 80px (4xl) verticale e 16px (xl) orizzontale
+    // Oppure usa spacing-3xl (40px) se 80px è troppo.
+    padding: $spacing-4xl $spacing-xl;
+
     text-align: center;
-    border-radius: 8px;
+    border-radius: $radius-md; // 8px
     font-family: $font-body;
     font-size: 1rem;
-    border: 1px solid #d1d5db; // Bordo leggero
-
-    // Se vuoi essere fedele al 100% e mettere il tratteggio blu dello screenshot:
-    // border: 1px dashed #007bff;
-    // background-color: rgba(0, 123, 255, 0.05);
   }
 }

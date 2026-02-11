@@ -36,7 +36,63 @@ export const handlers = [
     return HttpResponse.json({ job_id: jobId });
   }),
 
-  // 4. JOB STATUS
+  // // 4. JOB STATUS
+  // http.get("/api/jobs/:job_id", async ({ params }) => {
+  //   const jobId = params.job_id as string;
+  //   const createdAt = jobsDatabase.get(jobId);
+
+  //   if (!createdAt) return new HttpResponse(null, { status: 404 });
+
+  //   const elapsed = Date.now() - createdAt;
+
+  //   if (elapsed < 1000) {
+  //     return HttpResponse.json({
+  //       status: "queued",
+  //       progress: 0,
+  //       health_points: null,
+  //     });
+  //   }
+  //   // if (elapsed < 3000) {
+  //   //   const progress = Math.min(
+  //   //     100,
+  //   //     Math.floor(((elapsed - 1000) / 2000) * 100),
+  //   //   );
+  //   //   return HttpResponse.json({
+  //   //     status: "running",
+  //   //     progress,
+  //   //     health_points: null,
+  //   //   });
+  //   // }
+  //   if (elapsed < 3000) {
+  //     // --- LOGICA BONUS: DADO SFORTUNATO 🎲 ---
+  //     // Ogni volta che il frontend chiede info, c'è il 10% di probabilità che fallisca.
+  //     // Poiché il polling avviene più volte, la probabilità totale è circa il 20-30%.
+  //     if (Math.random() < 0.1) {
+  //       return HttpResponse.json({
+  //         status: "failed", // <--- STATO FALLITO
+  //         progress: 0,
+  //         health_points: null,
+  //       });
+  //     }
+  //     // ----------------------------------------
+
+  //     const progress = Math.min(
+  //       100,
+  //       Math.floor(((elapsed - 1000) / 2000) * 100),
+  //     );
+  //     return HttpResponse.json({
+  //       status: "running",
+  //       progress,
+  //       health_points: null,
+  //     });
+  //   }
+  //   return HttpResponse.json({
+  //     status: "done",
+  //     progress: 100,
+  //     health_points: Math.floor(Math.random() * 101),
+  //   });
+  // }),
+  // 4. JOB STATUS (Logica con Battaglia Lunga + Fallimento Casuale)
   http.get("/api/jobs/:job_id", async ({ params }) => {
     const jobId = params.job_id as string;
     const createdAt = jobsDatabase.get(jobId);
@@ -45,6 +101,7 @@ export const handlers = [
 
     const elapsed = Date.now() - createdAt;
 
+    // --- 1. STATO QUEUED (0%) ---
     if (elapsed < 1000) {
       return HttpResponse.json({
         status: "queued",
@@ -52,44 +109,38 @@ export const handlers = [
         health_points: null,
       });
     }
-    // if (elapsed < 3000) {
-    //   const progress = Math.min(
-    //     100,
-    //     Math.floor(((elapsed - 1000) / 2000) * 100),
-    //   );
-    //   return HttpResponse.json({
-    //     status: "running",
-    //     progress,
-    //     health_points: null,
-    //   });
-    // }
-    if (elapsed < 3000) {
-      // --- LOGICA BONUS: DADO SFORTUNATO 🎲 ---
-      // Ogni volta che il frontend chiede info, c'è il 10% di probabilità che fallisca.
-      // Poiché il polling avviene più volte, la probabilità totale è circa il 20-30%.
-      if (Math.random() < 0.1) {
+
+    // --- 2. STATO RUNNING (Avanzamento) ---
+    if (elapsed < 5000) {
+      // --- LOGICA FALLIMENTO CASUALE (Il tuo Math.random) ---
+      // Aumentiamo leggermente la soglia (es. 0.15) perché la battaglia dura di più
+      // e ci sono più tentativi di polling.
+      if (Math.random() < 0.15) {
         return HttpResponse.json({
-          status: "failed", // <--- STATO FALLITO
+          status: "failed", // <--- Qui scatta il caso 4 (Box Grigio)
           progress: 0,
           health_points: null,
         });
       }
-      // ----------------------------------------
 
+      // Calcolo progresso su 4 secondi (da 1000ms a 5000ms)
       const progress = Math.min(
-        100,
-        Math.floor(((elapsed - 1000) / 2000) * 100),
+        99,
+        Math.floor(((elapsed - 1000) / 4000) * 100),
       );
+
       return HttpResponse.json({
         status: "running",
         progress,
         health_points: null,
       });
     }
+
+    // --- 3. STATO DONE (100%) ---
     return HttpResponse.json({
       status: "done",
       progress: 100,
-      health_points: Math.floor(Math.random() * 101),
+      health_points: Math.floor(Math.random() * 101), // Risultato finale HP
     });
   }),
 ];

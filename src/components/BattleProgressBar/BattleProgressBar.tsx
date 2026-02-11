@@ -17,19 +17,23 @@ export const BattleProgressBar = ({
   if (!isVisible && status !== "failed") return null;
 
   const isFailed = status === "failed";
-  const isDone = status === "done";
+  // const isDone = status === "done";
 
   return (
-    <div className="battle-progress">
-      <div className="battle-progress__bar">
-        <div
-          className={`battle-progress__fill ${isFailed ? "battle-progress__fill--failed" : ""} ${isDone ? "battle-progress__fill--done" : ""}`}
-          style={{ width: `${progress}%` }}
-        />
-      </div>
-      <span className="battle-progress__text">
-        {isFailed ? "❌" : `${Math.round(progress)}%`}
-      </span>
-    </div>
+    !isFailed && (
+      <>
+        <div className="battle-progress">
+          <div className="battle-progress__bar">
+            <div
+              className={`battle-progress__fill ${isFailed ? "battle-progress__fill--failed" : ""} `}
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <span className="battle-progress__text">
+            {`${Math.round(progress)}%`}
+          </span>
+        </div>
+      </>
+    )
   );
 };

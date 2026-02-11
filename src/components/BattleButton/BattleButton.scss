@@ -1,21 +1,28 @@
 @use "../../styles/variables" as *;
 
 .battle-button {
-  background-color: $color-primary; // Blu scuro
+  background-color: $color-primary;
   color: $color-white;
   font-family: $font-heading;
   font-weight: 700;
-  padding: 12px 24px;
-  border-radius: $border-radius;
+
+  padding: $spacing-l $spacing-2xl;
+
+  border-radius: $radius-md;
   font-size: 1rem;
-  width: 100%; // Occupa tutto lo spazio disponibile nel contenitore
+  max-width: 340px;
+  width: 100%;
+  margin: 0 auto;
   transition: all 0.2s ease;
   border: 2px solid transparent;
 
   &:hover:not(:disabled) {
+    // Lighten è una funzione nativa SCSS, va benissimo
     background-color: lighten($color-primary, 10%);
-    transform: translateY(-2px); // Piccolo effetto sollevamento
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+
+    // Ombra armonizzata (blu scuro invece di nero)
+    box-shadow: 0 4px 8px rgba($color-primary, 0.2);
   }
 
   &:active:not(:disabled) {
@@ -23,9 +30,15 @@
   }
 
   &:disabled {
-    background-color: #ccc; // Grigio disabilitato
-    color: #666;
+    // #ccc -> Uso il grigio chiaro del tuo sistema (border-soft o text-light)
+    // Qui uso text-light con opacità ridotta per lo sfondo
+    background-color: rgba($color-text-light, 0.3);
+
+    // #666 -> Uso il tuo colore per testo secondario
+    color: $color-text-light;
+
     cursor: not-allowed;
     opacity: 0.7;
+    box-shadow: none; // Rimuove eventuali ombre
   }
 }

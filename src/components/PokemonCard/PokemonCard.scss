@@ -2,44 +2,61 @@
 
 .pokemon-card {
   background: $color-white;
-  border-radius: $border-radius;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: $radius-md; // Usa la variabile 8px
+
+  // Ho armonizzato l'ombra al colore primario (opzionale, ma più coerente)
+  box-shadow: 0 8px 16px rgba($color-primary, 0.1);
+
   overflow: hidden;
   width: 100%;
-  max-width: 340px; // Larghezza simile al design
+  max-width: 340px;
   font-family: $font-heading;
   transition: transform 0.2s;
-  border: 1px solid #eee;
+
+  // Sostituito #eee con la variabile standard
+  border: $border-light;
 
   // --- 1. HEADER DINAMICO ---
   &__header {
-    padding: 12px 16px;
+    // 12px non esisteva. Ho standardizzato a 16px (xl) o 8px (l).
+    // Qui uso: Verticale 8px, Orizzontale 16px
+    padding: $spacing-l $spacing-xl;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: $color-white;
-    background-color: $color-primary; // Default: Blu Notte (#1D2C4E)
+
+    // #1D2C4E -> $color-primary
+    background-color: $color-primary;
+
     font-weight: 700;
     font-size: 0.9rem;
     transition: background-color 0.3s;
 
     &--warning {
-      background-color: #a60000; // Rosso scuro (dal tuo screenshot)
+      // #a60000 -> $color-secondary
+      background-color: $color-secondary;
     }
 
     &--defeated {
-      background-color: #8d99ae; // Grigio bluastro (dal tuo screenshot)
+      // Questo grigio (#8d99ae) non è nelle variabili.
+      // O lo aggiungi in variables.scss come $color-disabled o lo lasci così.
+      // Qui uso text-light provvisoriamente, ma meglio hardcoded se specifico.
+      background-color: #8d99ae;
     }
   }
 
   // --- 2. IMMAGINE ---
   &__image-container {
-    background-color: #ebf3f5; // Azzurrino chiaro di sfondo
+    // #ebf3f5 -> Uso il tuo sfondo soft standard (che è azzurrino/grigio 5%)
+    background-color: $border-color-soft;
+
     height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; // Per l'overlay
+    position: relative;
     overflow: hidden;
   }
 
@@ -51,7 +68,7 @@
     z-index: 1;
 
     &--defeated {
-      filter: grayscale(100%) opacity(0.5) contrast(1.2); // Effetto "spento"
+      filter: grayscale(100%) opacity(0.5) contrast(1.2);
     }
   }
 
@@ -62,6 +79,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
+
+    // 60px è un valore unico, lascialo hardcoded o crea variabile icon-size
     width: 60px;
     height: 60px;
 
@@ -73,34 +92,39 @@
 
   // --- 3. CORPO ---
   &__body {
-    padding: 16px;
+    padding: $spacing-xl; // 16px
   }
 
   &__title {
     font-size: 1.2rem;
     font-weight: 800;
     color: $color-primary;
-    margin-bottom: 8px;
+    margin-bottom: $spacing-l; // 8px
   }
 
   &__description {
     font-family: $font-body;
-    color: #4a4a4a;
+    color: $color-text-main; // Uniformato il testo scuro (#4a4a4a -> primary o text-main)
     font-size: 0.9rem;
     line-height: 1.4;
-    margin-bottom: 20px;
-    min-height: 60px; // Per allineare le card
+
+    // 20px non è standard. Ho messo 24px (lg) per spaziare meglio, oppure usa xl (16px)
+    margin-bottom: 24px;
+    min-height: 60px;
   }
 
   // --- 4. GRIGLIA STATISTICHE ---
   &__stats-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; // 3 colonne uguali
-    gap: 8px;
-    border-top: 1px solid #f0f0f0;
-    border-bottom: 1px solid #f0f0f0;
-    margin-bottom: 12px;
-    padding: 8px 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: $spacing-l; // 8px
+
+    // #f0f0f0 -> $border-light
+    border-top: $border-light;
+    border-bottom: $border-light;
+
+    margin-bottom: $spacing-l; // 12px -> 8px o 16px. Qui ho stretto a 8px.
+    padding: $spacing-l 0; // 8px
   }
 
   &__stat-col {
@@ -111,7 +135,7 @@
     font-size: 0.75rem;
     color: $color-primary;
     font-weight: 700;
-    padding: 4px;
+    padding: 4px; // Spazio micro, ok hardcoded o $spacing-xs (se esiste 4px)
     border-radius: 4px;
 
     img {
@@ -120,19 +144,18 @@
       margin-bottom: 4px;
     }
 
-    // STILE SPECIALE PER COLONNA HP (PS)
     &--hp-warning {
-      background-color: #a60000; // Sfondo Rosso
-      color: white; // Testo Bianco
+      background-color: $color-secondary; // Rosso
+      color: $color-white;
 
       img {
         filter: brightness(0) invert(1);
-      } // Rende l'icona bianca
+      }
     }
 
     &--hp-defeated {
-      background-color: #8d99ae; // Sfondo Grigio
-      color: white;
+      background-color: #8d99ae; // Grigio specifico
+      color: $color-white;
 
       img {
         filter: brightness(0) invert(1);
@@ -154,7 +177,7 @@
 
   &__footer-icons {
     display: flex;
-    gap: 4px;
+    gap: 4px; // Spazio micro
 
     img {
       width: 18px;

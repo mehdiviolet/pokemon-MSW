@@ -22,14 +22,6 @@
       width 0.3s ease-out,
       background-color 0.3s;
     width: 0%; // Parte da 0
-
-    &--failed {
-      background-color: $color-secondary; // Rosso se fallito
-    }
-
-    &--done {
-      background-color: #4caf50; // Verde se finito (opzionale)
-    }
   }
 
   &__text {

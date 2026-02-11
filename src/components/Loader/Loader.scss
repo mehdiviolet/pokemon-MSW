@@ -1,54 +1,56 @@
-// src/components/Loader/Loader.scss
 @use "../../styles/variables" as *;
-// @use "../../src/styles/variables" as *;
 
 .pokeball-spinner {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  border: 4px solid #333; // Bordo esterno nero
+  border: 4px solid $color-primary; // Usa il tuo colore scuro principale
   position: relative;
+  box-sizing: border-box; // Importante per non sballare le misure col bordo
 
-  // Il trucco: Gradiente netto per fare metà rossa e metà bianca
+  // Il trucco: Gradiente netto
   background: linear-gradient(
     to bottom,
     $color-secondary 0%,
     // Rosso
     $color-secondary 48%,
-    #333 48%,
-    // Linea nera in mezzo (tramite gradiente)
-    #333 52%,
+    // Fine Rosso
+    $color-primary 48%,
+    // Inizio Linea Scura
+    $color-primary 52%,
+    // Fine Linea Scura
     $color-white 52%,
-    // Bianco
-    $color-white 100%
+    // Inizio Bianco
+    $color-white 100% // Fine Bianco
   );
 
-  animation: spin 1s linear infinite; // Rotazione infinita
+  animation: spin 1s linear infinite;
 
-  // Il bottone centrale (Cerchio bianco con bordo nero)
-  &::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 15px;
-    height: 15px;
-    background-color: $color-white;
-    border: 4px solid #333;
-    border-radius: 50%;
-    z-index: 10;
-  }
+  // Cerchio centrale grande (Bordo del bottone)
   &::before {
     content: "";
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
+    width: 24px; // Leggermente più piccolo per proporzione
+    height: 24px;
+    background-color: $color-primary; // Sfondo scuro
+    border-radius: 50%;
+    z-index: 5;
+  }
+
+  // Bottone centrale piccolo (Il click)
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
     background-color: $color-white;
-    border: 4px solid #333;
+    border: 2px solid $color-primary; // Bordo scuro
     border-radius: 50%;
     z-index: 10;
   }
