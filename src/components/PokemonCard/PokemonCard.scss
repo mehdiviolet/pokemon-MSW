@@ -30,7 +30,7 @@
     // #1D2C4E -> $color-primary
     background-color: $color-primary;
 
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.9rem;
     transition: background-color 0.3s;
 
@@ -43,7 +43,7 @@
       // Questo grigio (#8d99ae) non è nelle variabili.
       // O lo aggiungi in variables.scss come $color-disabled o lo lasci così.
       // Qui uso text-light provvisoriamente, ma meglio hardcoded se specifico.
-      background-color: #8d99ae;
+      background-color: $color-disabled;
     }
   }
 
@@ -72,25 +72,96 @@
     z-index: 1;
 
     &--defeated {
-      filter: grayscale(100%) opacity(0.5) contrast(1.2);
+      filter: grayscale(90%) opacity(0.4) contrast(1.2);
+
+      // background-color: rgba($color-primary, 0.5);
     }
   }
 
   // Overlay Teschio
+  // &__skull-overlay {
+  //   position: absolute;
+  //   top: 50%;
+  //   left: 50%;
+  //   transform: translate(-50%, -50%);
+  //   z-index: 10;
+  //   width: 100%;
+  //   height: 100%;
+  //   background-color: rgba($color-primary, 0.5);
+
+  //   img {
+  //     width: 50%;
+  //     height: 50%;
+  //     filter: $svg-white;
+  //     transform: translate(50%, 50%);
+  //     padding: 24px;
+  //     position: relative;
+  //     z-index: 20;
+  //   }
+
+  //   &::after {
+  //     content: "";
+  //     position: absolute;
+  //     top: 50%;
+  //     left: 50%;
+  //     transform: translate(-50%, -50%);
+
+  //     // Più piccolo del cardine nero
+  //     width: 100px;
+  //     height: 100px;
+  //     background-color: rgba($color-primary, 0.6);
+  //     border-radius: $radius-infinte;
+  //   }
+
   &__skull-overlay {
+    // 1. POSIZIONAMENTO E SFONDO GENERALE
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 10;
 
-    // 60px è un valore unico, lascialo hardcoded o crea variabile icon-size
-    width: 60px;
-    height: 60px;
+    // Questo è il "velo" scuro/blu che copre il Pokémon
+    background-color: rgba(
+      20,
+      30,
+      50,
+      0.6
+    ); // Un blu scuro semi-trasparente (simile alla tua immagine)
 
+    // 2. CENTRATURA (La magia di Flexbox)
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // 3. IL CERCHIO CENTRALE (Background dell'icona)
+    &::before {
+      content: "";
+      position: absolute; // Assoluto rispetto all'overlay, ma centrato dal flex
+      width: 80px; // Dimensione del cerchio
+      height: 80px;
+      background-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+      ); // Bianco/Grigio molto trasparente
+      border-radius: 50%; // Lo rende rotondo
+      z-index: 11; // Livello intermedio
+      backdrop-filter: blur(
+        2px
+      ); // (Opzionale) Aggiunge un tocco "glass" carino
+    }
+
+    // 4. L'ICONA DEL TESCHIO
     img {
-      width: 100%;
-      height: 100%;
+      width: 40px; // Dimensione del teschio
+      height: 40px;
+      z-index: 12; // Deve stare SOPRA il cerchio (::before)
+
+      // Se la tua icona non è già bianca, usa questo per forzarla:
+      filter: brightness(0) invert(1);
     }
   }
 
@@ -165,7 +236,7 @@
     }
 
     &--hp-defeated {
-      background-color: #8d99ae; // Grigio specifico
+      background-color: $color-disabled; // Grigio specifico
       color: $color-white;
 
       img {

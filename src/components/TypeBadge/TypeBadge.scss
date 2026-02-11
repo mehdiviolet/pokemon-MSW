@@ -2,29 +2,32 @@
 
 .type-badge {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
+  letter-spacing: 1.8px;
 
   // 6px -> Standardizzo a 8px
   gap: $spacing-l;
 
   // 6px 12px -> Sono valori "micro".
   // O li lasci hardcoded, o usi: padding: $spacing-l $spacing-xl; (8px 16px - più grande)
-  padding: 6px 12px;
+  padding: 2px 12px;
 
   background-color: $color-white;
   border-radius: 20px; // Pillola (forma specifica, ok hardcoded)
 
   // Uniformo l'ombra al colore primario (invece del nero puro)
-  box-shadow: 0 2px 4px rgba($color-primary, 0.1);
+  // box-shadow: 0 2px 4px rgba($color-primary, 0.1);
 
   font-family: $font-heading;
   font-size: 0.85rem;
   font-weight: 600;
   color: $color-primary;
   text-transform: uppercase;
+  // line-height: 1.5px;
 
   // #eee -> variabile border standard
   border: $border-light;
+
   color: $color-white;
   // background-color:
   background: $color-white-badge;

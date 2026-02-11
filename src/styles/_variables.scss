@@ -6,6 +6,7 @@ $color-secondary: #8c0202; // Rosso
 $color-background: #f2f4f8; // Grigio chiaro
 $color-white: #ffffff;
 $color-white-badge: rgba($color-white, 0.3); // <--- Nuova variabile
+$color-disabled: #8d99ae;
 $color-text-main: #101a2e;
 $color-text-light: #9ba8ba;
 
@@ -34,7 +35,9 @@ $radius-infinte: 1000px;
 // Uso la variabile colore definita sopra
 $bg-color-soft: rgba($color-primary, 0.05);
 $border-color-soft: rgba($color-primary, 0.05);
-$border-light: 1px solid $border-color-soft;
+
+$border-superLight: 1px solid $border-color-soft;
+$border-light: 1px solid rgba($color-white, 0.4);
 
 // --- SHADOWS ---
 $shadow-soft: -2px 4px 6px $border-color-soft;
